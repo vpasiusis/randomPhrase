@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Nuotabų generavimas!{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class=" centered" id ="text">
+    
+        {{ phr.getPhrase() }} </br>
+        <div class="afterCentered">
+        <a href="" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
+        <form action="{{ path('phrases', {'url_code': phr.getUrl()}) }}" method="post">
+            <div id="edit-template" style="display:none;">
+                {% if phr.getPhrase() is defined %}
+                    <textarea name = "phrase_text">{{phr.getPhrase() }}</textarea>
+                    <textarea name = "phrase_color">{{phr.getColor() }}</textarea>
+                {% endif %}
+            </div>
+
+            <input type="submit" class="btn btn-success"  value="Išsaugoti nuostabą" />
+        </form>
+      
+      </div>
+      
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+
+<script>
+    {% set parameters = app.request.query.all()|merge({'script': false}) %}
+    document.getElementById("text").style.borderColor = "{{ phr.getColor()}}";
+</script>
+
+{% endblock %}
+
