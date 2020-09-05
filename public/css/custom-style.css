@@ -3,7 +3,10 @@
     
     width: 100%;
   }
-  
+  .searchbar{
+      width:80%;
+      margin:20px 0 30px 20px;
+  }
   .centered{
     position: absolute;
     width: 350px;
@@ -11,7 +14,7 @@
     z-index: 15;
     top: 50%;
     left: 50%;
-    margin: -200px 0 0 -170px;
+    margin: -150px 0 0 -170px;
     border: 5px solid black;
     border-radius: 50%;
     text-align: center;
@@ -25,7 +28,9 @@
     }
 @media only screen and (min-width: 600px) {
     /* For tablets: */
-  
+    .searchbar{
+        margin-top:20px;
+    }
     .col-s-1 {width: 8.33%;}
     .col-s-2 {width: 16.66%;}
     .col-s-3 {width: 25%;}
@@ -40,6 +45,12 @@
     .col-s-12 {width: 100%;}
   }
   @media only screen and (min-width: 769px) {
+    .searchbar{
+        margin-top:20px;
+        margin-left:100px;
+        margin:20px 0 30px 80px;
+        width:80%;
+    }
     .centered{
         position: absolute;
         width: 800px;
@@ -47,7 +58,7 @@
         z-index: 15;
         top: 50%;
         left: 50%;
-        margin: -250px 0 0 -400px;
+        margin: -180px 0 0 -400px;
         border: 10px solid black;
         border-radius: 50%;
         text-align: center;

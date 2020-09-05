@@ -26,7 +26,7 @@ class PhraseController extends AbstractController
         ]);
     }
     /**
-     * @Route("/save/{url_code}", name="phrases")
+     * @Route("/save/{url_code}", name="phraseSave")
      */
     public function saveAction(Request $request,$url_code)
     { 
@@ -45,30 +45,43 @@ class PhraseController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        return new Response('Saved new product with id '.$phrase->getId());
+        return $this->render('phrase/show.html.twig', [
+            'new' => 'true',
+            'url_code' => $url_code,
+            'phr' => $phrase,
+        ]);
+       
       
     }
     /**
-     * @Route("/{url_code}", name="phrases")
+     * @Route("/{url_code}", name="phraseShow")
      */
-    public function showAction($url_code)
+    public function showAction(Request $request,$url_code)
     { 
-        $text=$request->request->get('phrase_text');
-        $color=$request->request->get('phrase_color');
-        $entityManager = $this->getDoctrine()->getManager();
+     
+        if($url_code=="search"){
+            $url_code = $request->request->get('url_code');
+            $repository = $this->getDoctrine()->getRepository(Phrase::class);
+            $phrase = $repository->findOneBy(['url_code' => $url_code]);
+        }
+        else{
+            $repository = $this->getDoctrine()->getRepository(Phrase::class);
+            $phrase = $repository->findOneBy(['url_code' => $url_code]);
+        }
+      
 
-        $phrase = new Phrase();
-        $phrase->setPhrase($text);
-        $phrase->setColor($color);
-        $phrase->setUrl($url_code);
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($phrase);
+        if (!$phrase) {
+            return $this->render('phrase/show.html.twig', [
+                'not_exist' => 'true',
+                'url_code' => $url_code,
+                'phr' => $phrase,
+            ]);
+        }
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-
-        return new Response('Saved new product with id '.$phrase->getId());
+        return $this->render('phrase/show.html.twig', [
+            'phr' => $phrase,
+        ]);
       
     }
 
