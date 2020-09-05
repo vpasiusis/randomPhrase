@@ -46,10 +46,10 @@ class Phrase
     }
 
     public function getUrl(){
-        return $this->url;
+        return $this->url_code;
     }
-    public function setUrl($url){
-        $this->url=$url;
+    public function setUrl($url_code){
+        $this->url_code=$url_code;
     }
 
     public function getColor(){
@@ -58,6 +58,7 @@ class Phrase
     public function setColor($color){
         $this->color=$color;
     }
+
 
 
 }
