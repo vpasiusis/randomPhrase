@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Jūsų sugeneruota nuostaba!{% endblock %}
+
+{% block body %}
+
+
+{% if new is defined %}
+    <h3 style = "text-align:center;margin-top:-10px;"> Jūsų nuostaba sukurta adresu - {{url_code}}</h3>
+{% endif %}
+
+{% if not_exist is defined %}
+   <div class=" centered" id ="text">
+        NUOSTABA ADRESU -
+        {{ url_code }} NERASTA </br>
+        <div class="afterCentered">
+        <a href="{{ path('phrase')}}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
+
+      </div>
+      
+</div>
+
+{% else %}
+{% if new is  not defined %}
+ <h3 style = "text-align:center;margin-top:-10px;"> Jūsų išsaugota nuostaba</h3>
+{% endif %}
+<div class=" centered" id ="text">
+       
+        {{ phr.getPhrase() }} </br>
+        <div class="afterCentered">
+        <a href="{{ path('phrase')}}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
+
+      </div>
+      
+</div>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+{% if not_exist is not defined %}
+<script>
+    document.getElementById("text").style.borderColor = "{{ phr.getColor()}}";
+</script>
+{% endif %}
+
+{% endblock %}
+

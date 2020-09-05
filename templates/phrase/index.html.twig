@@ -11,8 +11,8 @@
     
         {{ phr.getPhrase() }} </br>
         <div class="afterCentered">
-        <a href="" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
-        <form action="{{ path('phrases', {'url_code': phr.getUrl()}) }}" method="post">
+        <a href="{{ path("phrase") }}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
+        <form action="{{ path('phraseSave', {'url_code': phr.getUrl()}) }}" method="post">
             <div id="edit-template" style="display:none;">
                 {% if phr.getPhrase() is defined %}
                     <textarea name = "phrase_text">{{phr.getPhrase() }}</textarea>
