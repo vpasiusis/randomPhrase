@@ -13,7 +13,7 @@
             {{ phr.getPhrase() }} </br>
         </div>
         <div class="afterCentered">
-        <a href="{{ path("phrase") }}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
+        <a href="{{ path("phrase") }}" id = "newPhrase" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
         <form action="{{ path('phraseSave', {'url_code': phr.getUrl()}) }}" method="post">
             <div id="edit-template" style="display:none;">
                 {% if phr.getPhrase() is defined %}
@@ -22,7 +22,7 @@
                 {% endif %}
             </div>
 
-            <input type="submit" class="btn btn-success"  value="Išsaugoti nuostabą" />
+            <input type="submit" class="btn btn-success"  id = "savePhrase" value="Išsaugoti nuostabą" />
         </form>
       
       </div>

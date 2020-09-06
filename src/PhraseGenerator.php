@@ -76,9 +76,6 @@ class PhraseGenerator
             }else{
                 $string.=" ".$adjective;
             }
-            if($adjectiveNumber==1){
-                $string.=",";
-            }
             if(($i+1)!==$adjectiveNumber){
                 $string.=",";
             }else{
