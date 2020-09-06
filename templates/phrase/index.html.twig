@@ -9,7 +9,9 @@
 
 <div class=" centered" id ="text">
     
-        {{ phr.getPhrase() }} </br>
+       <div class="text-inside">
+            {{ phr.getPhrase() }} </br>
+        </div>
         <div class="afterCentered">
         <a href="{{ path("phrase") }}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
         <form action="{{ path('phraseSave', {'url_code': phr.getUrl()}) }}" method="post">
