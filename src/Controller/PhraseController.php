@@ -37,24 +37,31 @@ class PhraseController extends AbstractController
     public function saveAction(Request $request,$url_code)
     { 
 
-        while($this->checkIfExists($url_code)!=='0'){
-            $url_code=$this->generator->unique_url();
-        }
+      
         $text=$request->request->get('phrase_text');
         $color=$request->request->get('phrase_color');
-        $entityManager = $this->getDoctrine()->getManager();
 
-        $phrase = new Phrase();
-        $phrase->setPhrase($text);
-        $phrase->setColor($color);
-        $phrase->setUrl($url_code);
+        if($text==null){
+            $repository = $this->getDoctrine()->getRepository(Phrase::class);
+            $phrase = $repository->findOneBy(['url_code' => $url_code]);
+            
+        }else{
+            while($this->checkIfExists($url_code)!=='0'){
+                $url_code=$this->generator->unique_url();
+            }
+            $entityManager = $this->getDoctrine()->getManager();
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($phrase);
+            $phrase = new Phrase();
+            $phrase->setPhrase($text);
+            $phrase->setColor($color);
+            $phrase->setUrl($url_code);
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+            // tell Doctrine you want to (eventually) save the Product (no queries yet)
+            $entityManager->persist($phrase);
 
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
+        }
         return $this->render('phrase/show.html.twig', [
             'new' => 'true',
             'url_code' => $url_code,
@@ -97,7 +104,7 @@ class PhraseController extends AbstractController
 
     function checkIfExists($url) {
         $repoPhrase =  $this->getDoctrine()->getRepository(Phrase::class);
-        $totalPhrases = $repoArticles->createQueryBuilder('a')
+        $totalPhrases = $repoPhrase->createQueryBuilder('a')
             ->where('a.url_code = '."'".$url."'")
             ->select('count(a.id)')
             ->getQuery()
