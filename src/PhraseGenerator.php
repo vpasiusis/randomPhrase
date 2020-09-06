@@ -1,8 +1,11 @@
 <?php
 namespace App;
 use App\Entity\Phrase;
-class PhraseGenerator
+
+class PhraseGenerator 
 {
+
+
     public function getRandomPhrase()
     {
         /**
@@ -109,4 +112,7 @@ class PhraseGenerator
     function unique_url($l = 8) {
         return substr(md5(uniqid(mt_rand(), true)), 0, $l);
     }
+
+
+   
 }

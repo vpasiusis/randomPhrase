@@ -6,13 +6,19 @@
 
 
 {% if new is defined %}
-    <h3 style = "text-align:center;margin-top:-10px;"> Jūsų nuostaba sukurta adresu - {{url_code}}</h3>
+<div class ="messageText">
+    <h3> Jūsų nuostaba sukurta adresu - {{url_code}}</h3>
+</div>
+   
 {% endif %}
 
 {% if not_exist is defined %}
    <div class=" centered" id ="text">
-        NUOSTABA ADRESU -
+        <div class="text-inside">
+              NUOSTABA ADRESU -
         {{ url_code }} NERASTA </br>
+        </div>
+      
         <div class="afterCentered">
         <a href="{{ path('phrase')}}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
 
@@ -22,11 +28,13 @@
 
 {% else %}
 {% if new is  not defined %}
- <h3 style = "text-align:center;margin-top:-10px;"> Jūsų išsaugota nuostaba</h3>
+ <h3  class ="messageText"> Jūsų išsaugota nuostaba</h3>
 {% endif %}
 <div class=" centered" id ="text">
        
-        {{ phr.getPhrase() }} </br>
+        <div class="text-inside">
+            {{ phr.getPhrase() }} </br>
+        </div>
         <div class="afterCentered">
         <a href="{{ path('phrase')}}" type="button" class="btn btn-warning">Generuoti kitą nuostabą</a>
 

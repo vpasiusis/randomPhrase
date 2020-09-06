@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>{% block title %}Let's Explore Symfony 4{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
@@ -22,13 +21,13 @@
 <header>
 
 </header>
-<div class = "searchbar">
+<div class = "d-flex justify-content-center searchbar">
 <form action="{{ path('phraseShow', {'url_code': "search"}) }}" method="post">
             <input class="form-control" name="url_code" type="text" placeholder="Įveskite savo nuostabos adresą" aria-label="Search">
             <input style = "margin-top:10px;" type="submit" class="btn btn-success"  value="Ieškoti nuostabos" />
         </form>
 </div>
-<main role="main" class="container main">
+<main role="main" class="d-flex justify-content-center container main">
     {% block body %}{% endblock %}
 </main>
 
