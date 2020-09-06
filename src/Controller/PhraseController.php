@@ -11,14 +11,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PhraseController extends AbstractController
 {
+
+    public function __construct()
+    {
+        $this->generator=$generator=new PhraseGenerator() ;
+        
+    }
     /**
      * @Route("/", name="phrase")
      */
     public function index()
     {
 
-        $generator=new PhraseGenerator() ;
-        $phrase = $generator->getRandomPhrase();
+       
+        $phrase = $this->generator->getRandomPhrase();
        
         return $this->render('phrase/index.html.twig', [
             'controller_name' => 'PhraseController',
@@ -30,6 +36,10 @@ class PhraseController extends AbstractController
      */
     public function saveAction(Request $request,$url_code)
     { 
+
+        while($this->checkIfExists($url_code)!=='0'){
+            $url_code=$this->generator->unique_url();
+        }
         $text=$request->request->get('phrase_text');
         $color=$request->request->get('phrase_color');
         $entityManager = $this->getDoctrine()->getManager();
@@ -83,6 +93,17 @@ class PhraseController extends AbstractController
             'phr' => $phrase,
         ]);
       
+    }
+
+    function checkIfExists($url) {
+        $repoPhrase =  $this->getDoctrine()->getRepository(Phrase::class);
+        $totalPhrases = $repoArticles->createQueryBuilder('a')
+            ->where('a.url_code = '."'".$url."'")
+            ->select('count(a.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $totalPhrases;
     }
 
 
